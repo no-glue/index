@@ -20,8 +20,6 @@ class Index{
 
 		$function=array_shift($argv);
 
-		print_r($argv);
-
 		$callback(
 			call_user_func_array(
 				array(new $object,$function),
