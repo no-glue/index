@@ -33,7 +33,7 @@ class Index{
 	}
 }
 
-(new \fiddles\Index())
+(new \index\Index())
 	->run(
 		$argv,
 		function($returned){
