@@ -1,6 +1,6 @@
 <?php
 
-namespace premade;
+namespace index;
 
 /**
  * SplClassLoader implementation that implements the technical interoperability
@@ -141,4 +141,4 @@ class SplClassLoader
     }
 }
 
-return (new \premade\SplClassLoader())->register();
+return (new \index\SplClassLoader())->register();
