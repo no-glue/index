@@ -11,7 +11,7 @@ class Index{
 		$loader->setIncludePath(dirname($folder));
 	}
 
-	public function run($argv,$callback,$namespace='\\fiddles\\'){
+	public function run($argv,$callback,$namespace='\\index\\'){
 		$argv=array_slice($argv,1);
 
 		$object=array_shift($argv);
@@ -20,14 +20,12 @@ class Index{
 
 		$function=array_shift($argv);
 
-		$callback(
+		return $callback(
 			call_user_func_array(
 				array(new $object,$function),
 				$argv
 			)
 		);
-
-		return $this;
 	}
 }
 
@@ -36,5 +34,7 @@ class Index{
 		$argv,
 		function($returned){
 			print $returned."\n";
+
+			return $returned;
 		}
 	);
