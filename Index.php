@@ -24,9 +24,15 @@ class Index{
 			$instream
 		);
 
-		if(is_array($result)){
-			$result=array_shift($result);
+		$instream=array_shift($result);
+
+		if(isset($result['callback'])){
+			$callback=array_shift($result);
+
+			$callback($result);
 		}
+
+		$result=$instream;
 
 		return $result;
 	}
