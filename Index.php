@@ -12,30 +12,29 @@ class Index{
 		$loader->setIncludePath(dirname($folder));
 	}
 
-	public function run($instream,$callback,$namespace='\\index\\'){
+	public function run($instream,$namespace='\\index\\'){
 		$object=fgets($instream);
 
 		$object=$namespace.$object;
 
 		$function=fgets($instream);
 
-		return $callback(
-			call_user_func_array(
-				array(new $object,$function),
-				$instream
-			)
+		$result = call_user_func_array(
+			array(new $object,$function),
+			$instream
 		);
+
+		if(is_array($result)){
+			$result=array_shift($result);
+		}
+
+		return $result;
 	}
 }
 
 fclose(
 	(new \index\Index())
 	->run(
-		fopen('php://stdin','r'),
-		function($returned){
-			print $returned."\n";
-
-			return $returned;
-		}
+		fopen('php://stdin','r')
 	)
 );
