@@ -8,33 +8,34 @@ class Index{
 		$folder=__DIR__
 	){
 		$loader=require_once($classLoader);
+
 		$loader->setIncludePath(dirname($folder));
 	}
 
-	public function run($argv,$callback,$namespace='\\index\\'){
-		$argv=array_slice($argv,1);
-
-		$object=array_shift($argv);
+	public function run($instream,$callback,$namespace='\\index\\'){
+		$object=fgets($instream);
 
 		$object=$namespace.$object;
 
-		$function=array_shift($argv);
+		$function=fgets($instream);
 
 		return $callback(
 			call_user_func_array(
 				array(new $object,$function),
-				$argv
+				$instream
 			)
 		);
 	}
 }
 
-(new \index\Index())
+fclose(
+	(new \index\Index())
 	->run(
-		$argv,
+		fopen('php://stdin','r'),
 		function($returned){
 			print $returned."\n";
 
 			return $returned;
 		}
-	);
+	)
+);
