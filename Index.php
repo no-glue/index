@@ -13,11 +13,11 @@ class Index{
 	}
 
 	public function run($instream,$namespace='\\index\\'){
-		$object=fgets($instream);
+		$object=trim(fgets($instream));
 
 		$object=$namespace.$object;
 
-		$function=fgets($instream);
+		$function=trim(fgets($instream));
 
 		$result = call_user_func_array(
 			array(new $object,$function),
