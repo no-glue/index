@@ -21,7 +21,7 @@ class Index{
 
 		$result = call_user_func_array(
 			array(new $object,$function),
-			$instream
+			array($instream)
 		);
 
 		$instream=array_shift($result);
